@@ -24,7 +24,7 @@ public class Organization {
     private String address;
     @OneToMany
     private List<Employee> employeeList;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Owner owner;
     @CreationTimestamp
     private LocalDateTime createdDate;

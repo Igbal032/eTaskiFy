@@ -2,9 +2,7 @@ package az.abb.etaskify.dtos;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -14,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class RegisterDTO {
     private String userName;
     @NotNull
+    @Email
     private String email;
     @NotNull
     private String organizationName;
@@ -21,5 +20,6 @@ public class RegisterDTO {
     private String phoneNumber;
     private String address;
     @NotBlank
-    private String password;
+    @Size(min=6)
+    private String passWord;
 }

@@ -17,6 +17,6 @@ public class Owner {
     private Long Id;
     private String userName;
     private String email;
-    @OneToOne
-    private Organization organization;
+//    @OneToOne(cascade=CascadeType.ALL)
+//    private Organization organization;
 }
