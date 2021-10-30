@@ -23,7 +23,6 @@ public class OrganizationController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody  RegisterDTO registerDTO){
-        RegisterDTO registerDTO1 = organizationService.create(registerDTO);
-        return new ResponseEntity<>("Hello World!!",HttpStatus.OK);
+        return new ResponseEntity<>(organizationService.create(registerDTO),HttpStatus.OK);
     }
 }

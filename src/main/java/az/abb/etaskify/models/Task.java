@@ -21,10 +21,10 @@ public class Task {
     private Long Id;
     private String title;
     private String description;
-    private String deadline;
+    private LocalDateTime deadline;
     private String status;
     @ManyToMany(mappedBy = "tasks")
-    private List<Employee> employeeList;
+    private List<Employee> employees;
     @ManyToOne
     private Organization organization;
     @CreationTimestamp

@@ -20,10 +20,11 @@ public class Organization {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long Id;
     private String organizationName;
+    private String email;
     private String phoneNumber;
     private String address;
-    @OneToMany
-    private List<Employee> employeeList;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Employee> employees;
     @OneToOne(cascade=CascadeType.ALL)
     private Owner owner;
     @CreationTimestamp

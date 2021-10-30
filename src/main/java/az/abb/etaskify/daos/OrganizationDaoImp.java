@@ -14,4 +14,10 @@ public class OrganizationDaoImp implements OrganizationDao {
     public Organization create(Organization organization) {
         return organizationRepo.save(organization);
     }
+
+    @Override
+    public Organization getByEmail(String email) {
+        return organizationRepo.getOrganizationByEmail(email
+        );
+    }
 }

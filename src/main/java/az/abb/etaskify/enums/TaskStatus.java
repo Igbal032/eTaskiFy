@@ -1,8 +1,8 @@
 package az.abb.etaskify.enums;
 
 public enum TaskStatus {
-    WAITING,
-    TODO,
+    TO_DO,
+    IN_PROGRESS,
     TESTING,
     DONE
 }
