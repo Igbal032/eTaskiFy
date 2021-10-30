@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class RegisterDTO {
+    private Long Id;
     private String userName;
     @NotNull
     @Email

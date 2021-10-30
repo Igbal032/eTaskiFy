@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class OrganizationDaoImp implements OrganizationDao {
     private final OrganizationRepo organizationRepo;
     @Override
-    public Organization create(Organization organization) {
+    public Organization save(Organization organization) {
         return organizationRepo.save(organization);
     }
 

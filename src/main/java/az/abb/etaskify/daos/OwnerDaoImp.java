@@ -13,7 +13,7 @@ public class OwnerDaoImp implements OwnerDao {
     private final OwnerRepo ownerRepo;
 
     @Override
-    public Owner create(Owner owner) {
+    public Owner save(Owner owner) {
         return ownerRepo.save(owner);
     }
 }

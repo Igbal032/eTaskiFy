@@ -22,11 +22,7 @@ public class Employee {
     private String name;
     private String surname;
     private String email;
-    @ManyToMany
-    @JoinTable(
-            name = "assigned_tasks",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id"))
+    @ManyToMany(mappedBy = "employees")
     private List<Task> tasks;
     @ManyToOne
     private Organization organization;

@@ -23,7 +23,11 @@ public class Task {
     private String description;
     private LocalDateTime deadline;
     private String status;
-    @ManyToMany(mappedBy = "tasks")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "assigned_tasks",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employees;
     @ManyToOne
     private Organization organization;

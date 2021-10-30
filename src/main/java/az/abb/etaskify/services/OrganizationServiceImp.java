@@ -22,14 +22,14 @@ public class OrganizationServiceImp implements OrganizationService {
     private final AccountDao accountDao;
 
     @Override
-    public RegisterDTO create(RegisterDTO registerDTO) {
+    public RegisterDTO save(RegisterDTO registerDTO) {
         Account newAccount = modelMapper.map(registerDTO,Account.class);
         accountDao.getAccountByEmail(newAccount.getEmail());
         Owner newOwner = modelMapper.map(registerDTO,Owner.class);
         Organization newOrg = modelMapper.map(registerDTO,Organization.class);
         newOrg.setOwner(newOwner);
-        organizationDao.create(newOrg);
-        accountDao.create(newAccount.toBuilder()
+        organizationDao.save(newOrg);
+        accountDao.save(newAccount.toBuilder()
                 .passWord(Helper.passEncode(newAccount.getPassWord()))
                 .role(Roles.ADMIN.toString())
                 .build());

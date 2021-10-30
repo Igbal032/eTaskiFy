@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class TaskDTO {
+    private Long Id;
     @NotBlank
     private String title;
     @NotBlank

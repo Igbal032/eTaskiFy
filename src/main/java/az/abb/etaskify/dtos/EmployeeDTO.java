@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class EmployeeDTO {
+    private Long Id;
     @NotNull
     private String name;
     @NotNull

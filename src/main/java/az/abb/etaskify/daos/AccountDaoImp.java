@@ -22,7 +22,7 @@ public class AccountDaoImp implements AccountDao {
     }
 
     @Override
-    public Account create(Account account) {
+    public Account save(Account account) {
         return accountRepo.save(account);
     }
 }
