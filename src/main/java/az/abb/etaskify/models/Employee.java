@@ -1,8 +1,10 @@
 package az.abb.etaskify.models;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -28,4 +30,7 @@ public class Employee {
     private List<Task> tasks;
     @ManyToOne
     private Organization organization;
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+    private LocalDateTime deletedDate;
 }

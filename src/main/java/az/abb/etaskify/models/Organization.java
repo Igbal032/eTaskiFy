@@ -1,8 +1,10 @@
 package az.abb.etaskify.models;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,11 +19,14 @@ public class Organization {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long Id;
-    private String name;
+    private String organizationName;
     private String phoneNumber;
     private String address;
     @OneToMany
     private List<Employee> employeeList;
     @OneToOne
     private Owner owner;
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+    private LocalDateTime deletedDate;
 }
