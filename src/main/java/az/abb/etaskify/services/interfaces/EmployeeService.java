@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface EmployeeService {
     EmployeeDTO save(EmployeeDTO employeeDTO, Account company);
-    List<TaskDTO> getTask(String email);
+    List<TaskDTO> getTasks(String email);
 
 }

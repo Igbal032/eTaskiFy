@@ -49,7 +49,7 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public List<TaskDTO> getTask(String email) {
+    public List<TaskDTO> getTasks(String email) {
         Employee employee = employeeDao.getEmployeeByEmail(email);
         TypeToken<List<TaskDTO>> typeToken = new TypeToken<>() {
         };

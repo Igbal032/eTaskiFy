@@ -1,5 +1,6 @@
 package az.abb.etaskify.controllers;
 
+import az.abb.etaskify.configs.JwtTokenUtil;
 import az.abb.etaskify.dtos.EmployeeDTO;
 import az.abb.etaskify.models.Account;
 import az.abb.etaskify.repos.AccountRepo;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -16,12 +18,12 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class EmployeeController {
 
-    private final AccountRepo accountRepo;
     private final EmployeeService employeeService;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody EmployeeDTO employeeDTO){
-        Account account = accountRepo.findAccountByEmail("iqbal.hoff32@list.ru");
+    public ResponseEntity<?> create(@Valid @RequestBody EmployeeDTO employeeDTO, HttpServletRequest request){
+        Account account = jwtTokenUtil.getUserId(request.getHeader("Authorization"));
         return new ResponseEntity<>(employeeService.save(employeeDTO, account), HttpStatus.OK);
     }
 

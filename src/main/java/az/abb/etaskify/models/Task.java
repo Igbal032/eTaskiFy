@@ -30,7 +30,7 @@ public class Task {
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private List<Employee> employees;
     @ManyToOne
-    private Organization organization;
+    private Employee buildByEmployee;
     @CreationTimestamp
     private LocalDateTime createdDate;
     private LocalDateTime deletedDate;
