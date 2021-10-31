@@ -27,16 +27,23 @@ public class TaskServiceImp implements TaskService {
     public TaskDTO save(TaskDTO taskDTO, Account company) {
         Task newTask = modelMapper.map(taskDTO, Task.class);
         newTask.setOrganization(organizationDao.getByEmail(company.getEmail()));
-        taskDao.save(newTask);
-        return taskDTO;
+        return modelMapper.map(taskDao.save(newTask),TaskDTO.class);
     }
-
     @Override
     public void assignTask(Long taskId, Long empId) {
         Task assignedTask = taskDao.getTaskById(taskId);
         Employee employee = employeeDao.getEmployeeById(empId);
         assignedTask.getEmployees().add(employee);
-        Task saved = taskDao.save(assignedTask);
+        taskDao.save(assignedTask);
+    }
+    @Override
+    public void assignTaskToMoreEmployees(Long taskId, Long[] empIds) {
+        Task assignedTask = taskDao.getTaskById(taskId);
+        for (int i = 0; i < empIds.length; i++) {
+            Employee employee = employeeDao.getEmployeeById(empIds[i]);
+            assignedTask.getEmployees().add(employee);
+            taskDao.save(assignedTask);
+        }
     }
 
 

@@ -40,10 +40,25 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 errorMessage, new HttpHeaders(), errorMessage.getStatus());
     }
 
+    @ExceptionHandler(value = {InvalidCredentialException.class})
+    public ResponseEntity<Object> handleInvalidCredentialException(InvalidCredentialException ex, WebRequest request) {
+        ErrorMessage errorMessage = new ErrorMessage(
+                HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "Email or Password does not match!!");
+        return new ResponseEntity<>(
+                errorMessage, new HttpHeaders(), errorMessage.getStatus());
+    }
+
     @ExceptionHandler(value = {TaskNotFoundException.class})
     public ResponseEntity<Object> handleAnyException(TaskNotFoundException ex, WebRequest request) {
         ErrorMessage errorMessage = new ErrorMessage(
                 HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "Task Not Found.");
+        return new ResponseEntity<>(
+                errorMessage, new HttpHeaders(), errorMessage.getStatus());
+    }
+    @ExceptionHandler(value = {AccountNotFoundException.class})
+    public ResponseEntity<Object> handleNotFoundException(AccountNotFoundException ex, WebRequest request) {
+        ErrorMessage errorMessage = new ErrorMessage(
+                HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "Account Not Found.");
         return new ResponseEntity<>(
                 errorMessage, new HttpHeaders(), errorMessage.getStatus());
     }
