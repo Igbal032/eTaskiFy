@@ -19,18 +19,6 @@ import java.util.*;
 @ControllerAdvice
 public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(Exception.class)
-//    public Map<String, String> handleValidationExceptions(
-//            MethodArgumentNotValidException ex) {
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getAllErrors().forEach((error) -> {
-//            String fieldName = ((FieldError) error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            errors.put(fieldName, errorMessage);
-//        });
-//        return errors;
-//    }
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleAnyException(Exception ex, WebRequest request) {

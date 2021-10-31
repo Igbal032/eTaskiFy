@@ -1,6 +1,7 @@
 package az.abb.etaskify.configs;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,12 +62,10 @@ public class JwtTokenUtil implements Serializable {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        String[] admin = {"ADMIN"};
-        String[] user = {"USER"};
         if (accountRepo.findAccountByEmail(userDetails.getUsername()).getRole().equals(Roles.ADMIN.toString()))
-            claims.put("scopes","ADMIN");
+            claims.put("roles",Arrays.asList("ADMIN"));
         else
-            claims.put("scopes","USER");
+            claims.put("roles", Arrays.asList("USER"));
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

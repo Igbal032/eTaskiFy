@@ -9,6 +9,7 @@ import az.abb.etaskify.services.interfaces.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class TaskController {
     private final JwtTokenUtil jwtTokenUtil;
 
     @PostMapping
-//    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> create(@Valid @RequestBody TaskDTO taskDTO,HttpServletRequest request){
         Account account = jwtTokenUtil.getUserId(request.getHeader("Authorization"));
         return new ResponseEntity<>(taskService.save(taskDTO, account), HttpStatus.OK);

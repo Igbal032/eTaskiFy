@@ -1,13 +1,11 @@
 package az.abb.etaskify.services;
 
 import az.abb.etaskify.daos.interfaces.EmployeeDao;
-import az.abb.etaskify.daos.interfaces.OrganizationDao;
 import az.abb.etaskify.daos.interfaces.TaskDao;
 import az.abb.etaskify.dtos.TaskDTO;
 import az.abb.etaskify.exceptions.TaskNotFoundException;
 import az.abb.etaskify.models.Account;
 import az.abb.etaskify.models.Employee;
-import az.abb.etaskify.models.Organization;
 import az.abb.etaskify.models.Task;
 import az.abb.etaskify.services.interfaces.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +48,6 @@ public class TaskServiceImp implements TaskService {
         Task assignedTask = taskDao.getTaskById(taskId);
         Employee checkEmp = employeeDao.getEmployeeByEmail(account.getEmail());
         if (checkEmp.equals(assignedTask.getBuildByEmployee())){
-
             for (int i = 0; i < empIds.length; i++) {
                 Employee selectedEmployee = employeeDao.getEmployeeById(empIds[i]);
                 if (checkEmp.getOrganization().equals(selectedEmployee.getOrganization())){

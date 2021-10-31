@@ -15,8 +15,10 @@ import javax.validation.constraints.Size;
 public class EmployeeDTO {
     private Long Id;
     @NotNull
+    @Size(min = 3)
     private String name;
     @NotNull
+    @Size(min = 3)
     private String surname;
     @NotNull
     @Email
