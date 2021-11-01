@@ -6,8 +6,10 @@ import az.abb.etaskify.dtos.TaskDTO;
 import az.abb.etaskify.exceptions.TaskNotFoundException;
 import az.abb.etaskify.models.Account;
 import az.abb.etaskify.models.Employee;
+import az.abb.etaskify.models.Mail;
 import az.abb.etaskify.models.Task;
 import az.abb.etaskify.services.interfaces.TaskService;
+import az.abb.etaskify.utils.SendMailService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -23,6 +25,7 @@ public class TaskServiceImp implements TaskService {
     private final ModelMapper modelMapper;
     private final TaskDao taskDao;
     private final EmployeeDao employeeDao;
+    private final SendMailService sendMailService;
 
     @Override
     public TaskDTO save(TaskDTO taskDTO, Account account) {
@@ -38,6 +41,7 @@ public class TaskServiceImp implements TaskService {
         if (checkEmp.equals(assignedTask.getBuildByEmployee())&&checkEmp.getOrganization().equals(selectedEmployee.getOrganization())) {
             assignedTask.getEmployees().add(selectedEmployee);
             taskDao.save(assignedTask);
+            sendMailService.sendMail(new Mail(selectedEmployee.getEmail(),"New Task",assignedTask.getDescription()));
         }
         else{
             throw new TaskNotFoundException("This task doesnt belong to this employee");
@@ -53,6 +57,8 @@ public class TaskServiceImp implements TaskService {
                 if (checkEmp.getOrganization().equals(selectedEmployee.getOrganization())){
                     assignedTask.getEmployees().add(selectedEmployee);
                     taskDao.save(assignedTask);
+                    System.out.println(selectedEmployee.getEmail());
+                    sendMailService.sendMail(new Mail(selectedEmployee.getEmail(),"New Task",assignedTask.getDescription()));
                 }
                 else {
                     throw new TaskNotFoundException("This task doesnt belong to this employee");
