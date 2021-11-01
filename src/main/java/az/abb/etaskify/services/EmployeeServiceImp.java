@@ -30,13 +30,18 @@ public class EmployeeServiceImp implements EmployeeService {
     private final EmployeeDao employeeDao;
 
 
+    /**
+     * {@inheritDoc}
+     * @param company, employeeDTO
+     * @return
+     */
     @Override
     public EmployeeDTO save(EmployeeDTO employeeDTO, Account company) {
 
         Account newAccount = modelMapper.map(employeeDTO, Account.class);
-        accountDao.getAccountByEmail(newAccount.getEmail());
         Employee newEmployee = modelMapper.map(employeeDTO, Employee.class);
         Organization organization = organizationDao.getByEmail(company.getEmail());
+        System.out.println(organization.getEmployees() +" null");
         newEmployee.setOrganization(organization);
         organization.getEmployees().add(newEmployee);
         organizationDao.save(organization);
@@ -47,7 +52,11 @@ public class EmployeeServiceImp implements EmployeeService {
         accountDao.save(newAccount);
         return employeeDTO;
     }
-
+    /**
+     * {@inheritDoc}
+     * @param email
+     * @return
+     */
     @Override
     public List<TaskDTO> getTasks(String email) {
         Employee employee = employeeDao.getEmployeeByEmail(email);

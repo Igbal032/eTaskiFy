@@ -47,6 +47,11 @@ public class TaskServiceImp implements TaskService {
             throw new TaskNotFoundException("This task doesnt belong to this employee");
         }
     }
+    /**
+     * {@inheritDoc}
+     * @param taskId, empIds, account
+     * @return
+     */
     @Override
     public void assignTaskToMoreEmployees(Long taskId, Long[] empIds,Account account) {
         Task assignedTask = taskDao.getTaskById(taskId);
@@ -57,7 +62,6 @@ public class TaskServiceImp implements TaskService {
                 if (checkEmp.getOrganization().equals(selectedEmployee.getOrganization())){
                     assignedTask.getEmployees().add(selectedEmployee);
                     taskDao.save(assignedTask);
-                    System.out.println(selectedEmployee.getEmail());
                     sendMailService.sendMail(new Mail(selectedEmployee.getEmail(),"New Task",assignedTask.getDescription()));
                 }
                 else {
@@ -70,9 +74,15 @@ public class TaskServiceImp implements TaskService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @param account
+     * @return
+     */
     @Override
     public List<TaskDTO> getAllTaskOfOrganization(Account account) {
         Employee employee = employeeDao.getEmployeeByEmail(account.getEmail());
+        System.out.println(employee.getId()+"  hhhhhhh" );
         TypeToken<List<TaskDTO>> typeToken = new TypeToken<>() {
         };
         List<Task> tasks = taskDao.getAllTask();

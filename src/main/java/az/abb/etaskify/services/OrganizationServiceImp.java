@@ -21,6 +21,11 @@ public class OrganizationServiceImp implements OrganizationService {
     private final OrganizationDao organizationDao;
     private final AccountDao accountDao;
 
+    /**
+     * {@inheritDoc}
+     * @param registerDTO
+     * @return
+     */
     @Override
     public RegisterDTO save(RegisterDTO registerDTO) {
         Account newAccount = modelMapper.map(registerDTO,Account.class);

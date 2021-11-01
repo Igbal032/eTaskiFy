@@ -23,7 +23,7 @@ public class Organization {
     private String email;
     private String phoneNumber;
     private String address;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Employee> employees;
     @OneToOne(cascade=CascadeType.ALL)
     private Owner owner;

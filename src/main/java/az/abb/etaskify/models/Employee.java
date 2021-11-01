@@ -22,7 +22,7 @@ public class Employee {
     private String name;
     private String surname;
     private String email;
-    @ManyToMany(mappedBy = "employees")
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.EAGER)
     private List<Task> tasks;
     @ManyToOne
     private Organization organization;
